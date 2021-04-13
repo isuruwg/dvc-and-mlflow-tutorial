@@ -4,7 +4,10 @@
 - [1. Introduction](#1-introduction)
   - [1.1. Environment setup](#11-environment-setup)
   - [1.2. Initialize DVC](#12-initialize-dvc)
-  - [Configure remote storage](#configure-remote-storage)
+  - [1.3. Configure remote storage](#13-configure-remote-storage)
+  - [1.4. Copy some data and let dvc manage it](#14-copy-some-data-and-let-dvc-manage-it)
+  - [1.5. Fetching data from remote](#15-fetching-data-from-remote)
+  - [1.6. Modifying data](#16-modifying-data)
 - [2. References](#2-references)
 
 # 1. Introduction
@@ -56,7 +59,7 @@ Changes to be committed:
         new file:   .dvcignore
 ```
 
-## Configure remote storage
+## 1.3. Configure remote storage
 
 [dvc add reference](https://dvc.org/doc/command-reference/remote/add)
 
@@ -76,6 +79,8 @@ This adds the following to the .dvc/config file
     url = /home/isuru/tmp/dvc-storage
 ```
 
+## 1.4. Copy some data and let dvc manage it
+
 Let's now copy some data to a local folder `data/`
 
 ```bash
@@ -91,6 +96,86 @@ Add the file to dvc:
 ```bash
 dvc add data/wine-quality.csv
 ```
+DVC creates a [wine-quality.csv.dvc](data/wine-quality.csv.dvc) file and also adds a [.gitignore](data/.gitignore) file inside the `data/` folder.
+
+Let's also add a git tag to make it easier to track the data versions through git:
+
+```bash
+# Add and commit:
+git add data/wine-quality.csv.dvc data/.gitignore
+git commit -m "data: track"
+
+git tag -a 'v1' -m 'raw data'
+```
+
+Now let's sync our local data with our remote:
+
+```bash
+dvc push
+```
+
+Let's now see what's inside our remote
+
+```bash
+ls -lR ~/tmp/dvc-storage/
+```
+
+This gives:
+
+```bash
+/home/user1/tmp/dvc-storage/:
+total 4
+drwxrwxr-x 2 user1 user1 4096 Apr 13 14:47 5d
+
+/home/user1/tmp/dvc-storage/5d:
+total 260
+-r--r--r-- 1 user1 user1 264426 Apr 13 14:47 6f24258e3c50bb01a61194b5401f5d
+```
+
+Now we can remove the local data:
+
+```bash
+rm -rf data/wine-quality.csv
+# Let's remove the data from .dvc/cache too
+rm -rf .dvc/cache
+```
+
+## 1.5. Fetching data from remote
+
+Since we deleted our data in the section above, we can bring them back from remote using `dvc pull`
+
+```bash
+dvc pull
+```
+
+## 1.6. Modifying data
+
+```bash
+# Let's do a simple modification to our csv file
+sed -i '2,1001d' data/wine-quality.csv
+# let's check dvc status
+dvc status
+```
+`dvc status` command shows that our file was changed:
+
+```bash
+data/wine-quality.csv.dvc:                                            
+        changed outs:
+                modified:           data/wine-quality.csv
+```
+
+Now let's add the new data file to dvc:
+
+```bash
+dvc add data/wine-quality.csv
+```
+
+Now let's do a git commit:
+```bash
+git add data/wine-quality.csv.dvc
+git commit -m "data: remove 1000 lines"
+```
+
 
 
 # 2. References 
