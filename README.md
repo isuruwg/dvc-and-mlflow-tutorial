@@ -2,13 +2,14 @@
 
 # TOC <!-- omit in toc -->
 - [1. Introduction](#1-introduction)
-  - [Environment setup](#environment-setup)
-  - [Initialize DVC](#initialize-dvc)
+  - [1.1. Environment setup](#11-environment-setup)
+  - [1.2. Initialize DVC](#12-initialize-dvc)
+  - [Configure remote storage](#configure-remote-storage)
 - [2. References](#2-references)
 
 # 1. Introduction
 
-## Environment setup
+## 1.1. Environment setup
 
 Create virtual environment:
 
@@ -28,7 +29,7 @@ Freeze dependencies:
 pip freeze > requirements.txt
 ```
 
-## Initialize DVC
+## 1.2. Initialize DVC
 
 This guide assumes you are already inside a git repo. If not, please initialize a git repo by doing `git init` or some other method.
 
@@ -55,7 +56,42 @@ Changes to be committed:
         new file:   .dvcignore
 ```
 
-NEXT TODO: At 10:54 of video. Continue. [youtube](https://youtu.be/W2DvpCYw22o?t=654)
+## Configure remote storage
+
+[dvc add reference](https://dvc.org/doc/command-reference/remote/add)
+
+The remote storage in dvc can be `s3`, `gs`, `gdrive`, etc. For this example we'll use a local folder `~/tmp/dvc-storage` for simplicity. 
+
+```bash
+# We'll add a location inside a local ~/tmp folder for testing 
+dvc remote add -d dvc-remote ~/tmp/dvc-storage
+```
+
+This adds the following to the .dvc/config file
+
+```ini
+[core]
+    remote = dvc-remote
+['remote "dvc-remote"']
+    url = /home/isuru/tmp/dvc-storage
+```
+
+Let's now copy some data to a local folder `data/`
+
+```bash
+mkdir data
+```
+
+Copy an example file;
+
+For this we'll copy [wine-quality.csv example file from mlflow](https://github.com/mlflow/mlflow/blob/master/examples/sklearn_elasticnet_wine/wine-quality.csv) into the [data/](data/) folder.
+
+Add the file to dvc:
+
+```bash
+dvc add data/wine-quality.csv
+```
+
 
 # 2. References 
 
