@@ -28,6 +28,9 @@ Install dependencies:
 ```bash
 pip install mlflow
 pip install dvc[all]
+
+# Dependencies for the MLFlow, DVC combined tutorial
+pip install scikit-learn
 ```
 
 Freeze dependencies:

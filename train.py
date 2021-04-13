@@ -23,9 +23,9 @@ logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
 
 # Constants for dvc
-PATH = '../data/wine-quality.csv'
-REPO = '/home/isuru/Dropbox/Projects/dvc-and-mlflow/dvc-and-mlflow-tutorial' # Path to the Git repo
-VERSION = 'v1' # We'll use the GitHub tag as the revision for mlflow
+PATH = 'data/wine-quality.csv'
+REPO = '/home/isuru/Dropbox/Projects/dvc-and-mlflow/dvc-and-mlflow-tutorial/' # Path to the Git repo
+VERSION = 'v2' # We'll use the GitHub tag as the revision for mlflow
 
 def eval_metrics(actual, pred):
     rmse = np.sqrt(mean_squared_error(actual, pred))
