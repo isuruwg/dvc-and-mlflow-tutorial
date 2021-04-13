@@ -1,16 +1,19 @@
 # Tutorial on how to use DVC and MLFlow <!-- omit in toc -->
 
 # TOC <!-- omit in toc -->
-- [1. Introduction](#1-introduction)
+- [1. An example using DVC and MLFlow](#1-an-example-using-dvc-and-mlflow)
   - [1.1. Environment setup](#11-environment-setup)
   - [1.2. Initialize DVC](#12-initialize-dvc)
   - [1.3. Configure remote storage](#13-configure-remote-storage)
   - [1.4. Copy some data and let dvc manage it](#14-copy-some-data-and-let-dvc-manage-it)
   - [1.5. Fetching data from remote](#15-fetching-data-from-remote)
   - [1.6. Modifying data](#16-modifying-data)
+  - [1.7. Usage with MLFlow](#17-usage-with-mlflow)
 - [2. References](#2-references)
 
-# 1. Introduction
+# 1. An example using DVC and MLFlow 
+
+This is based on [Data Versioning and Reproducible ML with DVC and MLflow - Youtube](https://www.youtube.com/watch?v=W2DvpCYw22o&t).
 
 ## 1.1. Environment setup
 
@@ -175,6 +178,25 @@ Now let's do a git commit:
 git add data/wine-quality.csv.dvc
 git commit -m "data: remove 1000 lines"
 ```
+
+Let's also add a git tag:
+
+```bash
+git tag -a 'v2' -m 'removed 1000 lines'
+```
+
+Let's also push our data to remote storage:
+
+```bash
+dvc push
+```
+
+## 1.7. Usage with MLFlow
+
+For this, we'll use [this file from mlflow examples](https://github.com/mlflow/mlflow/blob/master/examples/sklearn_elasticnet_wine/train.py). 
+
+This file has been downloaded to [src/](src/). ( [exact same version of file used can be accessed through this link](https://github.com/mlflow/mlflow/blob/d743a40426d5dedbde395a4e6bbdeebadbccd4dc/examples/sklearn_elasticnet_wine/train.py) )
+
 
 
 
