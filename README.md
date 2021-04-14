@@ -194,6 +194,8 @@ Let's also push our data to remote storage:
 dvc push
 ```
 
+Also remember to push your tag to the remote repo by doing `git push --tags`.
+
 ## 1.7. Usage with MLFlow
 
 For this, we'll use [this file from mlflow examples](https://github.com/mlflow/mlflow/blob/master/examples/sklearn_elasticnet_wine/train.py). 
