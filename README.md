@@ -8,7 +8,10 @@
   - [1.4. Copy some data and let dvc manage it](#14-copy-some-data-and-let-dvc-manage-it)
   - [1.5. Fetching data from remote](#15-fetching-data-from-remote)
   - [1.6. Modifying data](#16-modifying-data)
-  - [1.7. Usage with MLFlow](#17-usage-with-mlflow)
+  - [1.7. Using different data versions](#17-using-different-data-versions)
+    - [1.7.1. In python](#171-in-python)
+    - [Using Git and DVC](#using-git-and-dvc)
+  - [1.8. Usage with MLFlow](#18-usage-with-mlflow)
 - [2. References](#2-references)
 
 # 1. An example using DVC and MLFlow 
@@ -196,7 +199,30 @@ dvc push
 
 Also remember to push your tag to the remote repo by doing `git push --tags`.
 
-## 1.7. Usage with MLFlow
+## 1.7. Using different data versions
+
+### 1.7.1. In python
+
+```python
+import dvc.api
+
+data_url = dvc.api.get_url(
+        path = 'data/wine-quality.csv',
+        repo = '.',
+        rev = 'v2'
+    )
+
+# Then you can use the data in your favourite tool, eg: pandas;
+data = pd.read_csv(data_url)
+```
+
+**NOTE : There's currently an open issue** [here](https://github.com/iterative/dvc/issues/5590) which makes the `rev='v2'` type of versioning not work with local git repos. However, this still works if the repo is remote (i.e. `repo='git@github.com/my-repo.git'`)
+
+### Using Git and DVC
+
+
+
+## 1.8. Usage with MLFlow
 
 For this, we'll use [this file from mlflow examples](https://github.com/mlflow/mlflow/blob/master/examples/sklearn_elasticnet_wine/train.py). 
 
