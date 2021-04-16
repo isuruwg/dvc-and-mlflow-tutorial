@@ -229,8 +229,6 @@ For this, we'll use [this file from mlflow examples](https://github.com/mlflow/m
 This file has been downloaded to [src/](src/). ( [exact same version of file used can be accessed through this link](https://github.com/mlflow/mlflow/blob/d743a40426d5dedbde395a4e6bbdeebadbccd4dc/examples/sklearn_elasticnet_wine/train.py) )
 
 
-
-
 # 2. References 
 
 1. [Data Versioning and Reproducible ML with DVC and MLflow - Youtube](https://www.youtube.com/watch?v=W2DvpCYw22o&t)
