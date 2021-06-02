@@ -143,7 +143,7 @@ tqdm==4.60.0
 typing-extensions==3.7.4.3
 ujson==4.0.2
 uritemplate==3.0.1
-urllib3==1.26.4
+urllib3==1.26.5
 voluptuous==0.12.1
 wcwidth==0.2.5
 webdavclient3==3.14.5
