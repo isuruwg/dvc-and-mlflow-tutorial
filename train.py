@@ -24,11 +24,8 @@ logger = logging.getLogger(__name__)
 
 # Constants for dvc
 PATH = 'data/wine-quality.csv'
-REPO = 'git@github.com-isuruwg:isuruwg/dvc-and-mlflow-tutorial.git' # Path to the Git repo
-# NOTE: https://github.com/iterative/dvc/issues/5590 , revisions with local repos do not work 
-# according to the linked issue. 
-# revisions still work with remote repos though.
-VERSION = 'v2' # We'll use the GitHub tag as the revision for mlflow
+REPO = '.' # Path to the Git repo
+VERSION = 'v1' # We'll use the GitHub tag as the revision for mlflow
 
 def eval_metrics(actual, pred):
     rmse = np.sqrt(mean_squared_error(actual, pred))

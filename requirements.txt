@@ -38,7 +38,7 @@ docker==5.0.0
 docopt==0.6.2
 dpath==2.0.1
 dulwich==0.20.21
-dvc==2.0.17
+dvc==2.0.18
 entrypoints==0.3
 Flask==1.1.2
 flatten-dict==0.3.0
