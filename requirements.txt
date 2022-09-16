@@ -72,7 +72,7 @@ jsonpath-ng==1.5.2
 knack==0.8.1
 lxml==4.6.3
 mailchecker==4.0.6
-Mako==1.1.4
+Mako==1.2.2
 MarkupSafe==1.1.1
 mlflow==1.15.0
 msal==1.11.0
